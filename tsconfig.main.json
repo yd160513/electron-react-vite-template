@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "dist-electron",
+    "allowJs": true,  // 允许编译 JS 文件，因为我们的 Electron 主进程和渲染进程都是 JS 文件，TSC 默认编译 TS 文件。
+  },
+  "include": ["electron"]
+}

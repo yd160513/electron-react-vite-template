@@ -10,7 +10,7 @@ const logger = console
  * @param handler - 业务处理函数
  * @returns {Promise}
  */
-const handler = (channel, handler) => {
+export const handler = (channel, handler) => {
     if (handlers.has(channel)) {
         throw new Error(`handler ${channel} has already registered`)
     }
@@ -37,7 +37,7 @@ const handler = (channel, handler) => {
  * @param {string} channel - IPC 通道名
  * @param {function} listener - 事件监听函数
  */
-const on = (channel, listener) => {
+export const on = (channel, listener) => {
     if (listeners.has(channel)) {
         throw new Error(`handler ${channel} has already registered`)
     }
@@ -62,15 +62,9 @@ const on = (channel, listener) => {
  * @param {string} channel - 通道名
  * @param  {...any} args - 参数
  */
-function send(win, channel, ...args) {
+export const send = (win, channel, ...args) => {
     if (win && !win.isDestroyed()) {
         logger.log(`[IPC-Main] Sending: ${channel}`, args);
         win.webContents.send(channel, ...args);
     }
-}
-
-module.exports = {
-    handler,
-    on,
-    send
 }

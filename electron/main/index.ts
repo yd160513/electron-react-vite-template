@@ -1,13 +1,15 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
-const ipcMainHandler = require('./ipcMainHandler')
+import { app, BrowserWindow } from 'electron'
+import path from 'node:path'
+import * as ipcMainHandler from './ipcMainHandler'
+
+console.log('MAIN TEST log')
 
 function createWindow() {
     const win = new BrowserWindow({
         width: 1200,
         height: 800,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './../preload/index.js')
         }
     })
 

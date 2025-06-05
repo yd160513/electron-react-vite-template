@@ -51,7 +51,7 @@ electron 模块属于 Node.js 环境特有的 API，在浏览器环境无法运�
 3. Electron 运行时环境会自动提供 electron 模块，不需要打包进最终产物
 
 ## 待解决问题
-[x] 组件中应该在哪里进行 ipcRenderer.on 监听，如果在组件中进行监听，那么每执行一次 useState 的 set 就会重新调用一次 ipcRenderer.on 方法   
+[x] 组件中应该在哪里进行 ipcRenderer.on 监听，如果在组件中进行监听，那么每执行一次 useState 的 set 就会重新调用一次 ipcRenderer.on 方法      
 [x] 开发环境下每个组件都会执行两次(app 组件中的 “app component” 日志会打印两次)   
-✅ package.json 中的 main 字段应该指向 dist-electron 下的 main.js 还是 electron 下的 main.js，有什么区别？
+✅ package.json 中的 main 字段应该指向 dist-electron 下的 main.js 还是 electron 下的 main.js，有什么区别？    
 > 一个是编译后的，一个是源码，通过 vite-plugin-electron 配置入口文件，每次修改主进程代码后热更新。

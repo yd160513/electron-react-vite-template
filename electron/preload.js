@@ -1,8 +1,11 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 
-// 暴露必要API给渲染进程
 contextBridge.exposeInMainWorld('electron', {
-    process: {
-        platform: process.platform
-    }
+    invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
+    send: (channel, ...args) => ipcRenderer.send(channel, ...args),
+    on: (channel, listener) => {
+        const subscription = (_, ...args) => listener(...args)
+        ipcRenderer.on(channel, subscription)
+        return () => ipcRenderer.removeListener(channel, subscription)
+    },
 })

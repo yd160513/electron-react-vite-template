@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const ipcMainHandler = require('./ipcMainHandler')
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -8,6 +9,17 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
+    })
+
+    ipcMainHandler.handler('test-invoke', (_, args) => {
+        console.log('Received test-invoke:', args)
+        return 'Hello from main process'
+    })
+
+    ipcMainHandler.on('test-send', (_, args) => {
+        console.log('Received test-send:', args)
+
+        ipcMainHandler.send(win, 'test-on', {a: 'test-on'})
     })
 
     if (process.env.NODE_ENV === 'development') {

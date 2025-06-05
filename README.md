@@ -13,9 +13,10 @@
 ✅ 开发模式热重载 (HMR)  
 ✅ 主进程/渲染进程代码分离  
 ✅ 跨平台打包支持 (Windows/macOS/Linux)  
-[x] 进程间通信预配置   
+✅ 主进程和渲染进程间通信   
+[x] 渲染进程和渲染进程间通信   
 [x] 日志管理   
-[x] 应用升级
+[x] 应用升级   
 
 ## 快速开始
 ```bash
@@ -48,3 +49,8 @@ electron 模块属于 Node.js 环境特有的 API，在浏览器环境无法运�
 1. 主进程代码 (electron/main.js) 会被编译到 dist-electron 目录
 2. 渲染进程代码会被编译到 dist 目录
 3. Electron 运行时环境会自动提供 electron 模块，不需要打包进最终产物
+
+## 待解决问题
+[x] 组件中应该在哪里进行 ipcRenderer.on 监听，如果在组件中进行监听，那么每执行一次 useState 的 set 就会重新调用一次 ipcRenderer.on 方法   
+[x] 开发环境下每个组件都会执行两次(app 组件中的 “app component” 日志会打印两次)   
+[x] package.json 中的 main 字段应该指向 dist-electron 下的 main.js 还是 electron 下的 main.js，有什么区别？
